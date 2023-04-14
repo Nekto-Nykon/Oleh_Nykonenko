@@ -6,9 +6,9 @@ import java.util.List;
 public class FourthTask {
     public static Integer pairCountFirst(List<Integer> values, Integer target ){
         int counter = 0;
-        for(int i = 0 ; i < values.size();i++){
-            for(int j = i+1; j < values.size(); j++){
-                if(target.equals(values.get(i) + values.get(j))){
+        for(int iter = 0 ; iter < values.size();iter++){
+            for(int positionForPair = iter+1; positionForPair < values.size(); positionForPair++){
+                if(target.equals(values.get(iter) + values.get(positionForPair))){
                     counter++;
                 }
             }
@@ -16,12 +16,10 @@ public class FourthTask {
         return  counter;
     }
     public static Long pairCountSecond(List<Integer> arr, Integer target){
-        //Long count = values.stream().filter(it -> values.stream().filter(at -> at > it ).anyMatch(j -> j+it==target)).count();
-
         return arr.stream()
-                .flatMap(i -> arr.stream()
-                        .filter(j -> !i.equals(j) && i + j == target)
-                        .map(j -> i + " + " + j + " = " + target))
+                .flatMap(elementOfArray -> arr.stream()
+                        .filter(elementForPair -> !elementOfArray.equals(elementForPair) && elementOfArray + elementForPair == target)
+                        .map(elementForPair -> elementOfArray + " + " + elementForPair + " = " + target))
                 .count()/2;
     }
 }
